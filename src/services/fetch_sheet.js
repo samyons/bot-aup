@@ -15,7 +15,7 @@ const CREDENTIALS = {
   };
 
   
-const SPREADSHEET_ID = process.env.SPREADSHEET_ID;
+const { SPREADSHEET_ID } = require('@root/config.json');
 
 async function fetchSheetData(range) {
     const auth = new google.auth.GoogleAuth({

@@ -12,7 +12,7 @@ function createTaskEmbed(selectedName, selectedTeam, foundTasks) {
     const embed = new EmbedBuilder()
         .setColor(0x6d6f78) // Couleur bleue
         .setTitle(`Tâches ${selectedTeam} de **${selectedName}**`)
-        .setDescription("Voici la liste de vos tâches. Blabla on peut mettre des trucs.")
+        .setDescription("Voici la liste de vos tâches.")
         .setThumbnail('https://i.ibb.co/wW2wBVz/472127252-918210523732495-7432582095665783489-n.png')
         .setTimestamp();
 

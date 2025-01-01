@@ -5,7 +5,7 @@ const { createTaskEmbed } = require('@services/tasks_embed');
 const { fetchAndSortTasks } = require('@services/fetch_tasks');
 const { handleTasksPagination } = require('@services/handle_tasks_pagination');
 
-const RANGE_NOMS = process.env.RANGE_NOMS;
+const { RANGE_NOMS } = require('@root/config.json');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -23,7 +23,7 @@ module.exports = {
         const user = names.find(row => row["Discord"] === userId);
 
         if (!user) {
-            return interaction.reply({ content: "Utilisateur non trouvé dans le système.", ephemeral: true });
+            return interaction.reply({ content: "Vous ne faîtes pas partie du projet AUP. Si vous pensez que c'est une erreur, contactez un coordinateur.", ephemeral: true });
         }
 
         const userName = user["Nom et prénom"]; // Nom et prénom de l'utilisateur

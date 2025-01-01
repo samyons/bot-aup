@@ -5,7 +5,7 @@ const { createTaskEmbed } = require('@services/tasks_embed');
 const { fetchAndSortTasks } = require('@services/fetch_tasks');
 const { handleTasksPagination } = require('@services/handle_tasks_pagination');
 
-const RANGE_NOMS = process.env.RANGE_NOMS;
+const { RANGE_NOMS } = require('@root/config.json');
 
 module.exports = {
     data: new SlashCommandBuilder()
