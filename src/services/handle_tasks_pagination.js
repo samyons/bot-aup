@@ -1,7 +1,7 @@
 const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 
 
-const { createTaskEmbed } = require('@services/tasks_embed');
+const { createTaskEmbed } = require('./tasks_embed');
 
 
 /**

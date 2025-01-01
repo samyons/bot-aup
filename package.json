@@ -12,12 +12,6 @@
   "dependencies": {
     "discord.js": "^14.16.3",
     "dotenv": "^16.4.7",
-    "googleapis": "^144.0.0",
-    "module-alias": "^2.2.3"
-  },
-  "_moduleAliases": {
-    "@root": ".",
-    "@services": "src/services",
-    "@commands": "src/commands"
+    "googleapis": "^144.0.0"
   }
 }

@@ -1,11 +1,12 @@
 const { SlashCommandBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } = require('discord.js');
 const { google } = require('googleapis');
-const { fetchSheetData } = require('@services/fetch_sheet');
-const { createTaskEmbed } = require('@services/tasks_embed');
-const { fetchAndSortTasks } = require('@services/fetch_tasks');
-const { handleTasksPagination } = require('@services/handle_tasks_pagination');
 
-const { RANGE_NOMS } = require('@root/config.json');
+const { fetchSheetData } = require('../../services/fetch_sheet');
+const { createTaskEmbed } = require('../../services/tasks_embed');
+const { fetchAndSortTasks } = require('../../services/fetch_tasks');
+const { handleTasksPagination } = require('../../services/handle_tasks_pagination');
+
+const { RANGE_NOMS } = require('../../../config.json');
 
 module.exports = {
     data: new SlashCommandBuilder()

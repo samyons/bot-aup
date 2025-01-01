@@ -1,5 +1,5 @@
-const { fetchSheetData } = require('@services/fetch_sheet');
-const { RANGE_TACHES_GPL, RANGE_TACHES_COMM } = require('@root/config.json');
+const { fetchSheetData } = require('./fetch_sheet');
+const { RANGE_TACHES_GPL, RANGE_TACHES_COMM } = require('../../config.json');
 
 /**
  * Récupère et trie les tâches d'un membre donné pour une équipe.
