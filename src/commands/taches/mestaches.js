@@ -24,7 +24,7 @@ module.exports = {
         const user = names.find(row => row["Discord"] === userId);
 
         if (!user) {
-            return interaction.reply({ content: "Vous ne faîtes pas partie du projet AUP. Si vous pensez que c'est une erreur, contactez un coordinateur.", ephemeral: true });
+            return interaction.reply({ content: "Vous ne faîtes pas partie du projet AUP ! Si vous pensez que c'est une erreur, contactez un coordinateur.", ephemeral: true });
         }
 
         const userName = user["Nom et prénom"]; // Nom et prénom de l'utilisateur
