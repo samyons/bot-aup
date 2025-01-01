@@ -43,9 +43,10 @@ async function handleTasksPagination(interaction, tasks, memberName, memberTeam)
     const message = await interaction.reply({
         embeds: [updateEmbed(currentPage)],
         components: [row],
+        ephemeral: true,
     });
 
-    const collector = message.createMessageComponentCollector({ time: 180000 }); // 60 secondes
+    const collector = message.createMessageComponentCollector({ time: 180000 }); // 3 minutes
 
     collector.on('collect', async (btnInteraction) => {
         if (btnInteraction.user.id !== interaction.user.id) {
