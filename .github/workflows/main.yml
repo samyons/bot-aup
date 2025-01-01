@@ -30,6 +30,6 @@ jobs:
       with:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
-        key: ${{ secrets.SSH_KEY }}
+        password: ${{ secrets.PASSWORD }}
         source: "."
         target: "/home/aup_bot_user/bot"
