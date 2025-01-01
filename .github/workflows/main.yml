@@ -1,28 +1,35 @@
+name: CI/CD
+
 on:
   push:
-    branches:
-      - main
-name: 🚀 Deploy bot on push
+    branches: [ main ]
+
 jobs:
-  web-deploy:
-    name: 🎉 Deploy
+  build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: 🚚 Get latest code
-        uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      - name: Use Node.js 20.14
-        uses: actions/setup-node@v4
-        with:
-          node-version: "20.14"
+    - name: Setup Node.js environment
+      uses: actions/setup-node@v2
+      with:
+        node-version: '22'
 
-      - name: 🔨 Build Project
-        run: |
-          npm install
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
 
-      - name: 📂 Sync files
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Copy files via ssh
+      uses: appleboy/scp-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.SSH_KEY }}
+        source: "."
+        target: "/home/aup_bot_user/bot"
