@@ -4,7 +4,7 @@
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "pm2 start node src/index.js --name discord-bot"
+    "start": "pm2 start src/index.js --name discord-bot"
   },
   "keywords": [],
   "author": "",
