@@ -11,7 +11,7 @@ const { RANGE_NOMS } = require('../../../config.json');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('mestaches')
-        .setDescription('Consulter la liste de vos tâches :'),
+        .setDescription('Consulter la liste de kljkljvos tâches :'),
 
     async execute(interaction) {
         const userId = interaction.user.username; // Identifiant Discord de la personne qui a fait la commande
