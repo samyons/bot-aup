@@ -14,7 +14,7 @@ async function fetchAndSortTasks(memberName, team) {
     console.log(allTasks);
     // Filtrer les tâches pour le membre donné
     const memberTasks = allTasks.filter(row => 
-        row["Tâche collective ?"] == "TRUE" || (row["Assigné à"] &&  row["Assigné à"].toLowerCase().includes(memberName.toLowerCase()))
+        row["Affectation"] && (row["Tâche collective ?"] == "TRUE" || (row["Assigné à"] &&  row["Assigné à"].toLowerCase().includes(memberName.toLowerCase())))
     );
 
     // Trier les tâches selon les critères donnés
