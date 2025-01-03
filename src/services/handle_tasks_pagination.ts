@@ -1,8 +1,5 @@
-const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
-
-
-const { createTaskEmbed } = require('@services/tasks_embed');
-
+import { ActionRowBuilder, ButtonBuilder, ButtonStyle, ChatInputCommandInteraction, CommandInteraction, Interaction, MessageComponentInteraction } from 'discord.js';
+import { createTaskEmbed } from './tasks_embed';
 
 /**
  * Gère la pagination des tâches et l'interaction avec l'utilisateur via des boutons de navigation.
@@ -12,12 +9,11 @@ const { createTaskEmbed } = require('@services/tasks_embed');
  * @param {string} memberTeam - Le nom de l'équipe (GPL ou COMM).
  * @returns {Promise<void>} - La fonction n'a pas de retour, elle modifie le message dans Discord avec les tâches paginées.
  */
-
-async function handleTasksPagination(interaction, tasks, memberName, memberTeam) {
+async function handleTasksPagination(interaction: ChatInputCommandInteraction, tasks: any[], memberName: string, memberTeam: string): Promise<void> {
     const itemsPerPage = 5;
     let currentPage = 0;
 
-    const updateEmbed = (page) => {
+    const updateEmbed = (page: number) => {
         const startIndex = page * itemsPerPage;
         const endIndex = startIndex + itemsPerPage;
         const tasksForPage = tasks.slice(startIndex, endIndex);
@@ -25,7 +21,7 @@ async function handleTasksPagination(interaction, tasks, memberName, memberTeam)
             .setFooter({ text: `Page ${page + 1} sur ${Math.ceil(tasks.length / itemsPerPage)}` });
     };
 
-    const row = new ActionRowBuilder()
+    const row = new ActionRowBuilder<ButtonBuilder>()
         .addComponents(
             new ButtonBuilder()
                 .setCustomId('previous')
@@ -40,14 +36,14 @@ async function handleTasksPagination(interaction, tasks, memberName, memberTeam)
         );
 
     // Envoyer le premier embed
-    const message = await interaction.reply({
+    const message = await interaction.editReply({
         embeds: [updateEmbed(currentPage)],
         components: [row],
     });
 
     const collector = message.createMessageComponentCollector({ time: 180000 }); // 60 secondes
 
-    collector.on('collect', async (btnInteraction) => {
+    collector.on('collect', async (btnInteraction: MessageComponentInteraction) => {
         if (btnInteraction.user.id !== interaction.user.id) {
             await btnInteraction.reply({ content: "Vous ne pouvez pas interagir avec ces boutons.", ephemeral: true });
             return;
@@ -75,4 +71,4 @@ async function handleTasksPagination(interaction, tasks, memberName, memberTeam)
     });
 }
 
-module.exports = { handleTasksPagination };
+export { handleTasksPagination };

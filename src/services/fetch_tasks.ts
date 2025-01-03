@@ -1,5 +1,6 @@
-const { fetchSheetData } = require('@services/fetch_sheet');
-const { RANGE_TACHES_GPL, RANGE_TACHES_COMM } = require('@root/config.json');
+import { fetchSheetData } from './fetch_sheet';
+import { RANGE_TACHES_GPL, RANGE_TACHES_COMM } from '../../config.json';
+
 
 /**
  * Récupère et trie les tâches d'un membre donné pour une équipe.
@@ -7,20 +8,19 @@ const { RANGE_TACHES_GPL, RANGE_TACHES_COMM } = require('@root/config.json');
  * @param {string} team - Le nom de l'équipe (GPL ou COMM).
  * @returns {Promise<Array>} - Liste triée des tâches.
  */
-async function fetchAndSortTasks(memberName, team) {
+async function fetchAndSortTasks(memberName: string, team: string): Promise<RowObject[]> {
     const range = team === 'GPL' ? RANGE_TACHES_GPL : RANGE_TACHES_COMM;
     const allTasks = await fetchSheetData(range);
 
-    console.log(allTasks);
     // Filtrer les tâches pour le membre donné
     const memberTasks = allTasks.filter(row => 
-        row["Tâche collective ?"] == "TRUE" || (row["Assigné à"] &&  row["Assigné à"].toLowerCase().includes(memberName.toLowerCase()))
+        row["Tâche collective ?"] === "TRUE" || (row["Assigné à"] && row["Assigné à"].toLowerCase().includes(memberName.toLowerCase()))
     );
 
     // Trier les tâches selon les critères donnés
     const sortedTasks = memberTasks.sort((a, b) => {
 
-        function parseDate(dateString) {
+        function parseDate(dateString: string): Date {
             const [day, month, year] = dateString.split('/').map(Number);
             return new Date(year, month - 1, day); // Les mois commencent à 0 en JS
         }
@@ -40,11 +40,9 @@ async function fetchAndSortTasks(memberName, team) {
         if (!deadlineA && deadlineB) return 1;
         if (deadlineA && !deadlineB) return -1;
 
-   
         // 3. Si les deux ont une deadline, trier par la date
         if (deadlineA && deadlineB) {
-            console.log(deadlineA, deadlineB);
-            return deadlineA - deadlineB;
+            return deadlineA.getTime() - deadlineB.getTime();
         }
 
         // Sinon, l'ordre reste inchangé
@@ -54,4 +52,4 @@ async function fetchAndSortTasks(memberName, team) {
     return sortedTasks;
 }
 
-module.exports = { fetchAndSortTasks };
+export { fetchAndSortTasks };

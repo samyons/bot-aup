@@ -1,14 +1,20 @@
-const { EmbedBuilder } = require('discord.js');
+import { EmbedBuilder } from 'discord.js';
+
+interface Task {
+    Statut: string;
+    Tâche: string;
+    Deadline?: string;
+}
 
 /**
  * Crée un embed pour afficher les tâches d'un utilisateur.
  * 
  * @param {string} selectedName - Le nom du membre.
  * @param {string} selectedTeam - L'équipe sélectionnée (GPL ou COMM).
- * @param {Array} foundTasks - Liste des tâches trouvées.
+ * @param {Task[]} foundTasks - Liste des tâches trouvées.
  * @returns {EmbedBuilder} - Un embed Discord formaté.
  */
-function createTaskEmbed(selectedName, selectedTeam, foundTasks) {
+function createTaskEmbed(selectedName: string, selectedTeam: string, foundTasks: Task[]): EmbedBuilder {
     const embed = new EmbedBuilder()
         .setColor(0x6d6f78) // Couleur bleue
         .setTitle(`Tâches ${selectedTeam} de **${selectedName}**`)
@@ -20,10 +26,10 @@ function createTaskEmbed(selectedName, selectedTeam, foundTasks) {
     if (foundTasks.length > 0) {
         foundTasks.forEach(row => {
             embed.addFields({
-                name: row["Statut"] === "En cours" ? `🔃  **${row["Tâche"]}**` :
-                      row["Statut"] === "Terminée" ? `✅  **${row["Tâche"]}**` :
-                      `❌  **${row["Tâche"]}**`,
-                value: row["Deadline"] ? `*Deadline le ${row["Deadline"]}*` : '*Deadline pas encore défini*',
+                name: row.Statut === "En cours" ? `🔃  **${row.Tâche}**` :
+                      row.Statut === "Terminée" ? `✅  **${row.Tâche}**` :
+                      `❌  **${row.Tâche}**`,
+                value: row.Deadline ? `*Deadline le ${row.Deadline}*` : '*Deadline pas encore défini*',
             });
         });
     } else {
@@ -33,4 +39,4 @@ function createTaskEmbed(selectedName, selectedTeam, foundTasks) {
     return embed;
 }
 
-module.exports = { createTaskEmbed };
+export { createTaskEmbed };

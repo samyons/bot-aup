@@ -1,13 +1,15 @@
-const { REST, Routes } = require('discord.js');
-require('module-alias/register');
-require('dotenv').config();
-const token = process.env.TOKEN;
-const clientId = process.env.CLIENT_ID;
-const guildId = process.env.GUILD_ID;
-const fs = require('node:fs');
-const path = require('node:path');
+import { REST, Routes } from 'discord.js';
+import dotenv from 'dotenv';
+import fs from 'node:fs';
+import path from 'node:path';
 
-const commands = [];
+dotenv.config();
+
+const token = process.env.TOKEN as string;
+const clientId = process.env.CLIENT_ID as string;
+const guildId = process.env.GUILD_ID as string;
+
+const commands: any[] = [];
 // Grab all the command folders from the commands directory you created earlier
 const foldersPath = path.join(__dirname, 'commands');
 const commandFolders = fs.readdirSync(foldersPath);
@@ -37,7 +39,7 @@ const rest = new REST().setToken(token);
 		console.log(`Started refreshing ${commands.length} application (/) commands.`);
 
 		// The put method is used to fully refresh all commands in the guild with the current set
-		const data = await rest.put(
+		const data: any = await rest.put(
 			Routes.applicationGuildCommands(clientId, guildId),
 			{ body: commands },
 		);
