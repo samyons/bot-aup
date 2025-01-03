@@ -42,6 +42,8 @@ jobs:
         password: ${{ secrets.PASSWORD }}
         script: |
           cd /home/aup_bot_user/bot
+          nvm use 22
+          node -v
           npm install  # Installe les dépendances sur le serveur
           npm run build
           npx pm2 restart 0  # Redémarre l'application avec PM2
