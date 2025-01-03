@@ -21,7 +21,7 @@ jobs:
       run: npm install
 
     - name: Build TypeScript project
-      run: npm run build  # Compile ton code TypeScript en JavaScript
+      run: npm run build
 
   deploy:
     needs: build
@@ -37,7 +37,7 @@ jobs:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
-        source: "./dist/*"  # Copier les fichiers compilés dans le dossier dist
+        source: "."  # Copier les fichiers compilés dans le dossier dist
         target: "/home/aup_bot_user/bot"
 
     - name: Execute commands on the server
