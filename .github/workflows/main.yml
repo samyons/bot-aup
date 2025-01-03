@@ -5,24 +5,6 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Setup Node.js environment
-      uses: actions/setup-node@v2
-      with:
-        node-version: '22'
-
-    - name: Install dependencies
-      run: npm install
-
-    - name: Build TypeScript project
-      run: npm run build
-
   deploy:
     needs: build
     runs-on: ubuntu-latest
@@ -49,4 +31,5 @@ jobs:
         script: |
           cd /home/aup_bot_user/bot
           npm install  # Installe les dépendances sur le serveur
+          npm run build
           npx pm2 restart 0  # Redémarre l'application avec PM2
