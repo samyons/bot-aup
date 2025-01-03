@@ -17,6 +17,12 @@ jobs:
       with:
         node-version: '22'
 
+    - name: Install dependencies
+      run: npm install
+
+    - name: Build TypeScript project
+      run: npm run build  # Compile ton code TypeScript en JavaScript
+
   deploy:
     needs: build
     runs-on: ubuntu-latest
@@ -31,9 +37,9 @@ jobs:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
-        source: "."
+        source: "./dist/*"  # Copier les fichiers compilés dans le dossier dist
         target: "/home/aup_bot_user/bot"
-      
+
     - name: Execute commands on the server
       uses: appleboy/ssh-action@master
       with:
@@ -42,5 +48,5 @@ jobs:
         password: ${{ secrets.PASSWORD }}
         script: |
           cd /home/aup_bot_user/bot
-          npm install
-          npx pm2 restart 0
+          npm install  # Installe les dépendances sur le serveur
+          npx pm2 restart 0  # Redémarre l'application avec PM2

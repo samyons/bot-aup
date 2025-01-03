@@ -1,2 +1,34 @@
-node_modules
+# Node modules
+node_modules/
+
+# Compiled output
+/dist
+/build
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Logs
+logs
+*.log
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# IDE specific files
+.idea/
+.vscode/
+
+# Optional npm package manager files
+package-lock.json
+yarn.lock
+
+# Environment files
 .env
+
+# Typescript definition files
+*.d.ts
+
+# NPM debug file
+npm-debug.log*
