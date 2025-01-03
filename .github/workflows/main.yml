@@ -58,7 +58,7 @@ jobs:
         source: "./dist/ ./package.json"
         target: "/home/aup_bot_user/bot/dist"
 
-    - name: Execute commands on the server
+    - name: Execute command on the server
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.HOST }}
