@@ -22,6 +22,9 @@ jobs:
 
     - name: Build the project
       run: npm run build
+    
+    - name: Check dist existence
+      run: tree -a
 
     - name: Archive the dist folder
       run: tar -czf dist.tar.gz dist
