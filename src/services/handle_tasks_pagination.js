@@ -40,7 +40,7 @@ async function handleTasksPagination(interaction, tasks, memberName, memberTeam)
         );
 
     // Envoyer le premier embed
-    const message = await interaction.reply({
+    const message = await interaction.editReply({
         embeds: [updateEmbed(currentPage)],
         components: [row],
         ephemeral: true,

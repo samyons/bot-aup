@@ -29,6 +29,7 @@ client.once(Events.ClientReady, readyClient => {
 });
 
 client.on(Events.InteractionCreate, async interaction => {
+	console.log("THIS IS THE INTERACTION", interaction);
     if (!interaction.isAutocomplete()) return;
     const command = interaction.client.commands.get(interaction.commandName);
 
@@ -45,6 +46,7 @@ client.on(Events.InteractionCreate, async interaction => {
     
 });
 client.on(Events.InteractionCreate, async interaction => {
+	console.log("THIS IS THE INTERACTION", interaction);
 	if (!interaction.isChatInputCommand()) return;
 	const command = interaction.client.commands.get(interaction.commandName);
 

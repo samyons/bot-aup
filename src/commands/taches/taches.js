@@ -51,13 +51,14 @@ module.exports = {
           );
     },
     async execute(interaction) {
+        await interaction.deferReply({ ephemeral: true });
         const selectedName = interaction.options.getString('nom'); // Nom sélectionné
         const selectedTeam = interaction.options.getString('equipe'); // Équipe sélectionnée
 
         const tasks = await fetchAndSortTasks(selectedName, selectedTeam);
 
         if (!tasks || tasks.length === 0) {
-            return interaction.reply({ content: `Aucune tâche trouvée pour ${selectedName} dans l'équipe ${selectedTeam}.`, ephemeral: true });
+            return interaction.editReply({ content: `Aucune tâche trouvée pour ${selectedName} dans l'équipe ${selectedTeam}.`, ephemeral: true });
         }
 
         // Gérer la pagination
