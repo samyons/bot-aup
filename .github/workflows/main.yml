@@ -39,7 +39,7 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-      
+
     - name: Download deploy artifact
       uses: actions/download-artifact@v3
       with:
@@ -60,6 +60,7 @@ jobs:
       run: |
         scp -r ./dist ${{ secrets.USERNAME }}@${{ secrets.HOST }}:/home/aup_bot_user/bot
         scp ./package.json ${{ secrets.USERNAME }}@${{ secrets.HOST }}:/home/aup_bot_user/bot
+        scp ./config.json ${{ secrets.USERNAME }}@${{ secrets.HOST }}:/home/aup_bot_user/bot
 
 
     - name: Execute command on the server
