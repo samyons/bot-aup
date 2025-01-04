@@ -5,7 +5,7 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -23,31 +23,6 @@ jobs:
     - name: Build the project
       run: npm run build
 
-    - name: Archive dist and package.json
-      run: tar -czf deploy.tar.gz dist package.json
-
-    - name: Upload deploy artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: deploy
-        path: deploy.tar.gz
-    
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Download deploy artifact
-      uses: actions/download-artifact@v3
-      with:
-        name: deploy
-        path: deploy
-
-    - name: Extract deploy artifact
-      run: tar -xzf deploy/deploy.tar.gz -C .
     - name: Set up SSH
       run: |
         mkdir -p ~/.ssh
