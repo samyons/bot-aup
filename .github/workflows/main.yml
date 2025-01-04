@@ -36,6 +36,8 @@ jobs:
         echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
         ssh-keyscan -H ${{ secrets.HOST }} >> ~/.ssh/known_hosts
+    - name : verify content
+      run: tree -a
     - name: Copy Dist and Config to Server
       run: |
         scp -r ./dist ${{ secrets.USERNAME }}@${{ secrets.HOST }}:/home/aup_bot_user/bot
